@@ -11,7 +11,7 @@ import {
     Text, Appearance, PixelRatio, Dimensions
 } from 'react-native';
 import { Button, TextInput, ActivityIndicator } from 'react-native-paper';
-import {darkMode, lightModeGray, normalize, shadedGray, sparklesEmoji} from '../styles/css';
+import {darkMode, lightMode, lightModeGray, normalize, shadedGray, sparklesEmoji} from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import {UserContextType} from '../lib/types';
@@ -114,12 +114,11 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
 
 
     return (userContext &&
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={isDarkmode ? darkMode.container : lightMode.container}>
             <StatusBar barStyle={isDarkmode ? "light-content" : "dark-content"}/>
             <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={darkMode.container}>
-                <View style={darkMode.inputContainer}>
+                <View style={isDarkmode ? darkMode.inputContainer : lightMode.inputContainer}>
                     <GradientText
                         text={"Sign in to your account" + sparklesEmoji}
                         fontSize={normalize(20)}
@@ -130,16 +129,16 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                         isGradientFill
                         gradientColors={isDarkmode ? ["#886AEA", "#8457C6"] : ["#6478FF", "#27AAFF"]}
                     />
-                    <Text style={darkMode.welcomeText}>Welcome back! Please enter your details.</Text>
-                    <Text style={darkMode.infoText}>Email</Text>
+                    <Text style={isDarkmode ? darkMode.welcomeText : lightMode.welcomeText}>Welcome back! Please enter your details.</Text>
+                    <Text style={isDarkmode ? darkMode.infoText : lightMode.infoText}>Email</Text>
                     <TextInput
-                        style={darkMode.input}
+                        style={isDarkmode ? darkMode.input : lightMode.input}
                         value={user.email}
                         placeholder={"Enter your email"}
                         autoCapitalize={"none"}
                         placeholderTextColor={shadedGray}
                         textColor={shadedGray}
-                        selectionColor={"rebeccapurple"}
+                        selectionColor={isDarkmode ? "#886AEA" : "#27AAFF"}
                         underlineStyle={{display:"none"}}
                         left={<TextInput.Icon icon={"email-outline"}/>}
                         onChangeText={text => changeEmail(text)}
@@ -149,7 +148,7 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                     />
                     <Text style={{color: 'red'}}>{emailerr}</Text>
 
-                    <Text style={darkMode.infoText}>Password</Text>
+                    <Text style={isDarkmode ? darkMode.infoText : lightMode.infoText}>Password</Text>
                     <TextInput
                         secureTextEntry={secureTextEntry}
                         value={user.password}
@@ -162,7 +161,7 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                         right={<TextInput.Icon onPress={() => setSecureTextEntry(!secureTextEntry)} icon={(secureTextEntry ? "eye-off-outline" : "eye-outline")}/>}
                         left={<TextInput.Icon icon={"lock-outline"}/>}
                         textColor={isDarkmode ? shadedGray : lightModeGray}
-                        selectionColor={"rebeccapurple"}
+                        selectionColor={isDarkmode ? "#886AEA" : "#27AAFF"}
                         underlineStyle={{display:"none"}}
                     />
                     <View style={{alignContent:"space-between", marginBottom:normalize(15), flexDirection:"row", flex:1, height:"100%"}}>
@@ -181,18 +180,18 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                             <LinearGradient
                                 start={[0,1]}
                                 end={[1,0]}
-                                colors={isDarkmode ? ["#65379B","#886AEA","#6457C6"] : ["#6478FF", "#27AAFF", "#6878FF"]} style={darkMode.gradientButton}>
+                                colors={isDarkmode ? ["#65379B","#886AEA","#6457C6"] : ["#6478FF", "#27AAFF", "#6878FF"]} style={isDarkmode ? darkMode.gradientButton : lightMode.gradientButton}>
                                 <Button textColor={"#FEFEFE"} onPress={submitForm}>
                                     Sign in
                                 </Button>
                             </LinearGradient>
                         </>}
                     <View style={{flexDirection: 'row', alignItems: 'center', marginBottom:"5%"}}>
-                        <View style={darkMode.lines} />
+                        <View style={isDarkmode ? darkMode.lines : lightMode.lines} />
                         <View>
-                            <Text style={darkMode.lineText}>Don't have an account yet?</Text>
+                            <Text style={isDarkmode ? darkMode.lineText : lightMode.lineText}>Don't have an account yet?</Text>
                         </View>
-                        <View style={darkMode.lines}/>
+                        <View style={isDarkmode ? darkMode.lines : lightMode.lines}/>
                     </View>
                     <View style={{borderBottomWidth:1, borderBottomColor: isDarkmode ? "#886AEA" : "#27AAFF", width:"100%", justifyContent:"center", alignContent:"center", paddingTop:normalize(10), flex:1}}>
                         <Button style={{height:normalize(40)}} textColor={isDarkmode ? "#886AEA" : "#27AAFF"} onPress={() => navigation.navigate("UserJoin")}>
