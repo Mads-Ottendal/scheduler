@@ -12,7 +12,7 @@ import { SafeAreaView,
     Text
 } from 'react-native';
 import { Button, TextInput, ActivityIndicator } from 'react-native-paper';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import {UserContextType} from '../lib/types';
@@ -107,15 +107,15 @@ export default function UserInfo({ navigation }: { navigation: any;}) {
     }
 
     return (userContext &&
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={darkMode.container}>
-                <ScrollView style={darkMode.scrollView}>
-                    <View style={darkMode.listItem}>
+                style={styles.container}>
+                <ScrollView style={styles.scrollView}>
+                    <View style={styles.listItem}>
                         {!updateName &&
                             <>
-                                <Text style={darkMode.subjectText}>
+                                <Text style={styles.subjectText}>
                                     Name: {userContext.user.name}
                                 </Text>
                                 <Button mode="contained" onPress={() => {{setUpdateName(true); setName(userContext.user.name as string);}}}>
@@ -134,7 +134,7 @@ export default function UserInfo({ navigation }: { navigation: any;}) {
                                     ref={nameEl}
                                 />
                                 <Text style={{color: 'red'}}>{nameerr}</Text>
-                                <View style={darkMode.itemLeft}>
+                                <View style={styles.itemLeft}>
                                     <Button mode="contained"  style={{marginRight: 20}} onPress={() => submitNameUpdate()}>
                                         Go Update Name
                                     </Button>
@@ -145,10 +145,10 @@ export default function UserInfo({ navigation }: { navigation: any;}) {
                             </>
                         }
                     </View>
-                    <View style={darkMode.listItem}>
+                    <View style={styles.listItem}>
                         {!updatePasswd &&
                             <>
-                                <Text style={darkMode.subjectText}>
+                                <Text style={styles.subjectText}>
                                     Password
                                 </Text>
                                 <Button mode="contained" onPress={() => setUpdatePasswd(true)}>
@@ -168,7 +168,7 @@ export default function UserInfo({ navigation }: { navigation: any;}) {
                                     ref={passwdEl}
                                 />
                                 <Text style={{color: 'red'}}>{passwderr}</Text>
-                                <View style={darkMode.itemLeft}>
+                                <View style={styles.itemLeft}>
                                     <Button mode="contained"  style={{marginRight: 20}} onPress={() => submitPasswdUpdate()}>
                                         Go Update Password
                                     </Button>
@@ -182,7 +182,7 @@ export default function UserInfo({ navigation }: { navigation: any;}) {
                 </ScrollView>
             </KeyboardAvoidingView>
             {inPost &&
-                <View style={darkMode.loading}>
+                <View style={styles.loading}>
                     <ActivityIndicator size="large" animating={true} color={"white"} />
                 </View>
             }

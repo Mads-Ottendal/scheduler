@@ -11,7 +11,7 @@ import { SafeAreaView,
     Text
 } from 'react-native';
 import { Button, TextInput, ActivityIndicator } from 'react-native-paper';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import {UserContextType} from '../lib/types';
@@ -137,13 +137,13 @@ export default function UserJoin({ navigation }: { navigation: any}) {
     }
 
     return (
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={darkMode.container}>
-                <View style={darkMode.mainContainer}>
-                    <View style={darkMode.itemCenter}>
-                        <Text style={darkMode.titleText}>Please Register</Text>
+                style={styles.container}>
+                <View style={styles.mainContainer}>
+                    <View style={styles.itemCenter}>
+                        <Text style={styles.titleText}>Please Register</Text>
                     </View>
                     <TextInput
                         mode='outlined'
@@ -185,7 +185,7 @@ export default function UserJoin({ navigation }: { navigation: any}) {
                         onChangeText={text => changePasswd2(text)}
                         ref={passwd2El}
                     />
-                    <View style={[darkMode.itemLeft, {marginTop: 20}]}>
+                    <View style={[styles.itemLeft, {marginTop: 20}]}>
                         <Button mode="contained" style={{marginRight: 20}} onPress={() => submitForm()}>
                             Sign Up
                         </Button>
@@ -199,7 +199,7 @@ export default function UserJoin({ navigation }: { navigation: any}) {
                 </View>
             </KeyboardAvoidingView>
             {inPost &&
-                <View style={darkMode.loading}>
+                <View style={styles.loading}>
                     <ActivityIndicator size="large" animating={true} color={"white"} />
                 </View>
             }

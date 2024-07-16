@@ -13,7 +13,7 @@ import { SafeAreaView,
     TouchableHighlight
 } from 'react-native';
 import { Button, Switch } from 'react-native-paper';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import { getDateString } from '../lib/utils';
@@ -179,19 +179,19 @@ export default function SchedulerScreen({ navigation, route }: { navigation: any
     }
 
     return (userContext &&
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={darkMode.container}>
-                <ScrollView style={darkMode.scrollView}>
-                    <View style={[darkMode.listItem,{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
+                style={styles.container}>
+                <ScrollView style={styles.scrollView}>
+                    <View style={[styles.listItem,{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}]}>
                         <Button icon="plus" mode="contained" onPress={() => navigation.navigate('Add')}>Activity</Button>
-                        <View style={darkMode.itemLeft}>
+                        <View style={styles.itemLeft}>
                             <Switch value={selectRange} onValueChange={() => changeSelectRange(!selectRange)} />
                             <Text> Select Date Ranges</Text>
                         </View>
                     </View>
-                    <View style={darkMode.listItem}>
+                    <View style={styles.listItem}>
                         {selectRange &&
                             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                 <Button
@@ -212,7 +212,7 @@ export default function SchedulerScreen({ navigation, route }: { navigation: any
                             </View>
                         }
                         {!selectRange &&
-                            <View style={darkMode.itemCenter}>
+                            <View style={styles.itemCenter}>
                                 <Button
                                     mode='outlined'
                                     color='black'
@@ -242,12 +242,12 @@ export default function SchedulerScreen({ navigation, route }: { navigation: any
                             (
                                 <View key={item.id}>
                                     <TouchableHighlight onPress={() => navigation.navigate('ActivityDetail',{activityObj: item})}>
-                                        <View style={darkMode.itemActivity}>
-                                            <Text style={darkMode.textActivity}>{item.title}</Text>
-                                            <Text style={darkMode.textActivity}>{getDateString(new Date(item.startTime*1000))} -- {getDateString(new Date(item.endTime*1000))}</Text>
+                                        <View style={styles.itemActivity}>
+                                            <Text style={styles.textActivity}>{item.title}</Text>
+                                            <Text style={styles.textActivity}>{getDateString(new Date(item.startTime*1000))} -- {getDateString(new Date(item.endTime*1000))}</Text>
                                         </View>
                                     </TouchableHighlight>
-                                    <View style={darkMode.spaceActivity}>
+                                    <View style={styles.spaceActivity}>
                                     </View>
                                 </View>
                             ))

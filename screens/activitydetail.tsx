@@ -16,7 +16,7 @@ import { SafeAreaView,
 import { Button, TextInput, Switch, ActivityIndicator } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { MaterialIcons } from '@expo/vector-icons';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import { timezone, getDateString } from '../lib/utils';
@@ -241,13 +241,13 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
     const currTime = (new Date().getTime()) / 1000;
     if (inEditing && activityObj.startTime >= currTime && activityObj.endTime >= currTime){
         return (userContext &&
-            <SafeAreaView style={darkMode.container}>
+            <SafeAreaView style={styles.container}>
                 <KeyboardAwareScrollView
                     keyboardShouldPersistTaps='handled'
                     scrollEnabled={true}
-                    style={darkMode.scrollView}
+                    style={styles.scrollView}
                 >
-                    <View style={[darkMode.listItem, darkMode.itemRight]}>
+                    <View style={[styles.listItem, styles.itemRight]}>
                         <Button icon="close" mode="outlined" style={{marginLeft: 10}} onPress={() => navigation.navigate('Scheduler')}>
                             Close
                         </Button>
@@ -298,8 +298,8 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                             onCancel={() => setEndDatePicker(false)}
                         />
                     </View>
-                    <View style={darkMode.listItem}>
-                        <View style={darkMode.itemLeft}>
+                    <View style={styles.listItem}>
+                        <View style={styles.itemLeft}>
                             <Text style={{fontSize: 20}}>Meeting Targets: </Text>
                             <Button
                                 mode='outlined'
@@ -344,13 +344,13 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                             )
                         }
                         {activity.meetingTargets.length > 0 &&
-                            <View style={darkMode.itemLeft}>
+                            <View style={styles.itemLeft}>
                                 <Text>Send Confirmation Emails: </Text>
                                 <Switch value={activity.sendConfirm} onValueChange={() => changeSendConfirm(!activity.sendConfirm)} />
                             </View>
                         }
                     </View>
-                    <View style={darkMode.listItem}>
+                    <View style={styles.listItem}>
                         <TextInput
                             mode='outlined'
                             label="Description"
@@ -361,7 +361,7 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                             onChangeText={text => changeDescription(text)}
                         />
                     </View>
-                    <View style={[darkMode.listItem, darkMode.itemLeft]}>
+                    <View style={[styles.listItem, styles.itemLeft]}>
                         <Button mode="contained" style={{marginRight: 20}} onPress={() => updateGo()}>
                             Go Update
                         </Button>
@@ -370,7 +370,7 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                         </Button>
                     </View>
                     {inPost &&
-                        <View style={darkMode.loading}>
+                        <View style={styles.loading}>
                             <ActivityIndicator size="large" animating={true} color={"white"} />
                         </View>
                     }
@@ -380,12 +380,12 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
     }
 
     return (userContext &&
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={darkMode.container}>
-                <ScrollView style={darkMode.scrollView}>
-                    <View style={[darkMode.listItem, darkMode.itemRight]}>
+                style={styles.container}>
+                <ScrollView style={styles.scrollView}>
+                    <View style={[styles.listItem, styles.itemRight]}>
                         {activityObj.startTime >= currTime && activityObj.endTime >= currTime &&
                             <Button icon="pencil" style={{marginLeft: 10}} mode="outlined" onPress={() => {setInEditing(true); navigation.setOptions({ title: 'Update Scheduled Activity' })}}>
                                 Edit
@@ -400,20 +400,20 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                     </View>
                     {activityObj &&
                         <>
-                            <View style={darkMode.listItem}>
+                            <View style={styles.listItem}>
                                 <Text style={{fontSize: 16}}>{activityObj.title}</Text>
                             </View>
-                            <View style={darkMode.listItem}>
+                            <View style={styles.listItem}>
                                 <Text style={{fontSize: 16}}>{getDateString(new Date(activityObj.startTime*1000))} -- {getDateString(new Date(activityObj.endTime*1000))}</Text>
                             </View>
                             {activityObj &&
                                 <>
                                     {activityObj.meetingTargets.length > 0 &&
                                         <>
-                                            <View style={darkMode.listItem}>
+                                            <View style={styles.listItem}>
                                                 <Text style={{fontSize: 16, lineHeight: 24}}>Meeting Targets:</Text>
                                                 {activityObj.meetingTargets.map((item: MeetingTarget, index: number) =>
-                                                    <View key={index} style={darkMode.itemLeft}>
+                                                    <View key={index} style={styles.itemLeft}>
                                                         <Text style={{fontSize: 16, lineHeight: 24}}>{item.name}{item.email ? ` - ${item.email}`: ''}    </Text>
                                                         {item.confirm &&
                                                             <>
@@ -422,7 +422,7 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                                                         }
                                                     </View>
                                                 )}
-                                                <View style={darkMode.itemLeft}>
+                                                <View style={styles.itemLeft}>
                                                     <Text style={{fontSize: 16, lineHeight: 24}}>Send Confirmation Emails: </Text><MaterialIcons name={activityObj.sendConfirm ? 'check-box':'check-box-outline-blank'} size={20} />
                                                 </View>
                                             </View>
@@ -437,7 +437,7 @@ export default function ActivityDetail({ navigation, route }: {navigation: any; 
                     }
                 </ScrollView>
                 {inPost &&
-                    <View style={darkMode.loading}>
+                    <View style={styles.loading}>
                         <ActivityIndicator size="large" animating={true} color={"white"} />
                     </View>
                 }

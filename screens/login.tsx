@@ -117,7 +117,7 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
         <SafeAreaView style={isDarkmode ? darkMode.container : lightMode.container}>
             <StatusBar barStyle={isDarkmode ? "light-content" : "dark-content"}/>
             <KeyboardAvoidingView
-                style={darkMode.container}>
+                style={isDarkmode ? darkMode.container : lightMode.container}>
                 <View style={isDarkmode ? darkMode.inputContainer : lightMode.inputContainer}>
                     <GradientText
                         text={"Sign in to your account" + sparklesEmoji}
@@ -136,8 +136,8 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                         value={user.email}
                         placeholder={"Enter your email"}
                         autoCapitalize={"none"}
-                        placeholderTextColor={shadedGray}
-                        textColor={shadedGray}
+                        placeholderTextColor={isDarkmode ? shadedGray : lightModeGray}
+                        textColor={isDarkmode ? shadedGray : lightModeGray}
                         selectionColor={isDarkmode ? "#886AEA" : "#27AAFF"}
                         underlineStyle={{display:"none"}}
                         left={<TextInput.Icon icon={"email-outline"}/>}
@@ -152,7 +152,7 @@ export default function LoginScreen({ navigation }: { navigation: any}) {
                     <TextInput
                         secureTextEntry={secureTextEntry}
                         value={user.password}
-                        style={[darkMode.input, {marginBottom: normalize(5)}]}
+                        style={[isDarkmode ? darkMode.input : lightMode.input, {marginBottom: normalize(5)}]}
                         placeholder={"Enter your password"}
                         autoCapitalize={"none"}
                         placeholderTextColor={isDarkmode ? shadedGray : lightModeGray}

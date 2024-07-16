@@ -11,7 +11,7 @@ import { SafeAreaView,
     Text
 } from 'react-native';
 import { Button, TextInput, ActivityIndicator } from 'react-native-paper';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { DOMAIN_URL } from '../lib/constants';
 import {UserContextType} from '../lib/types';
@@ -147,19 +147,19 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
     }
 
     return (userContext &&
-        <SafeAreaView style={darkMode.container}>
+        <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={darkMode.container}>
-                <View style={darkMode.mainContainer}>
-                    <View style={darkMode.itemCenter}>
-                        <Text style={darkMode.titleText}>Forgot Password</Text>
+                style={styles.container}>
+                <View style={styles.mainContainer}>
+                    <View style={styles.itemCenter}>
+                        <Text style={styles.titleText}>Forgot Password</Text>
                     </View>
                     {checkdata &&
                         <>
                             {numForCheck == checkdata['numForCheck'] &&
                                 <>
-                                    <Text style={darkMode.headingText}>Please reset your password</Text>
+                                    <Text style={styles.headingText}>Please reset your password</Text>
                                     <TextInput
                                         mode='outlined'
                                         label='Password'
@@ -179,7 +179,7 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
                                         onChangeText={text => setPasswd2(text.trim())}
                                         ref={passwd2El}
                                     />
-                                    <View style={[darkMode.itemLeft, {marginTop: 15}]}>
+                                    <View style={[styles.itemLeft, {marginTop: 15}]}>
                                         <Button mode="contained" style={{marginRight: 20}} onPress={() => submitPasswdReset()}>
                                             Reset Password
                                         </Button>
@@ -191,7 +191,7 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
                             }
                             {numForCheck != checkdata['numForCheck'] &&
                                 <>
-                                    <Text style={darkMode.headingText}>Email for password reset has been already sent! Please check the email we sent to you, and type the number in the following.</Text>
+                                    <Text style={styles.headingText}>Email for password reset has been already sent! Please check the email we sent to you, and type the number in the following.</Text>
                                     <TextInput
                                         mode='outlined'
                                         label="Please type the number you got in the email"
@@ -202,7 +202,7 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
                                         ref={numchkEl}
                                     />
                                     <Text style={{color: 'red'}}>{numchkerr}</Text>
-                                    <View style={[darkMode.itemLeft, {marginTop: 5}]}>
+                                    <View style={[styles.itemLeft, {marginTop: 5}]}>
                                         <Button mode="contained" style={{marginRight: 20}} onPress={() => submitNumberCheck()}>
                                             Send
                                         </Button>
@@ -228,7 +228,7 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
                                 ref={emailEl}
                             />
                             <Text style={{color: 'red'}}>{emailerr}</Text>
-                            <View style={[darkMode.itemLeft, {marginTop: 5}]}>
+                            <View style={[styles.itemLeft, {marginTop: 5}]}>
                                 <Button mode="contained" style={{marginRight: 20}} onPress={() => submitEmailCheck()}>
                                     Send Reset Email
                                 </Button>
@@ -241,7 +241,7 @@ export default function ForgotPasswd({ route, navigation }: { route: any; naviga
                 </View>
             </KeyboardAvoidingView>
             {inPost &&
-                <View style={darkMode.loading}>
+                <View style={styles.loading}>
                     <ActivityIndicator size="large" animating={true} color={"white"} />
                 </View>
             }

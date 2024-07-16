@@ -12,7 +12,7 @@ import { SafeAreaView,
 } from 'react-native';
 import { Button, TextInput, Switch, ActivityIndicator } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { darkMode } from '../styles/css';
+import { styles } from '../styles/css';
 import { UserContext } from '../components/Context';
 import { timezone, getDateString } from '../lib/utils';
 import { DOMAIN_URL } from '../lib/constants';
@@ -194,11 +194,11 @@ export default function AddSchedule({ navigation }: { navigation: any}) {
     }
 
     return (userContext &&
-    <SafeAreaView style={darkMode.container}>
+    <SafeAreaView style={styles.container}>
     <KeyboardAwareScrollView
         keyboardShouldPersistTaps='handled'
     scrollEnabled={true}
-    style={darkMode.scrollView}
+    style={styles.scrollView}
     >
     <View>
         <TextInput
@@ -246,8 +246,8 @@ export default function AddSchedule({ navigation }: { navigation: any}) {
     onCancel={() => setEndDatePicker(false)}
     />
     </View>
-    <View style={darkMode.listItem}>
-    <View style={darkMode.itemLeft}>
+    <View style={styles.listItem}>
+    <View style={styles.itemLeft}>
     <Text style={{fontSize: 20}}>Meeting Targets: </Text>
     <Button
     mode='outlined'
@@ -292,13 +292,13 @@ export default function AddSchedule({ navigation }: { navigation: any}) {
     )
     }
     {meetingTargets.length > 0 &&
-    <View style={darkMode.itemLeft}>
+    <View style={styles.itemLeft}>
         <Text>Send Confirmation Emails: </Text>
     <Switch value={sendConfirm} onValueChange={() => setSendConfirm(!sendConfirm)} />
     </View>
     }
     </View>
-    <View style={darkMode.listItem}>
+    <View style={styles.listItem}>
     <TextInput
         mode='outlined'
     label="Description"
@@ -314,7 +314,7 @@ export default function AddSchedule({ navigation }: { navigation: any}) {
     </Button>
     </KeyboardAwareScrollView>
     {inPost &&
-    <View style={darkMode.loading}>
+    <View style={styles.loading}>
     <ActivityIndicator size="large" animating={true} color={"white"} />
     </View>
     }
